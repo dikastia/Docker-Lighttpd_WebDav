@@ -2,7 +2,7 @@
 
 ## 소개
  Alpine 기반으로 제작된 Lighttpd WebDav 서버 이미지
-
+ > *UTF-8 전용 CP949 클라이언트 지원 안됨*
 ## 주요 기능
 
 - 🧊 /webdav 폴더의 UID/GID를 읽어서 Lighttpd UID/GID로 변경
@@ -11,7 +11,7 @@
   
 ## Nginx Proxy Manager
  - Advanced (Custom Nginx Configuration)
-   ```
+   ```nginx
    location / {
        auth_basic           "Private Site";    ## 인증 관련 설정 
        auth_basic_user_file "/data/access/1";  ## 인증 관련 설정 (사용자 목록)
@@ -60,23 +60,19 @@
    CMD ["/usr/sbin/lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
    ```
  - lighttpd.conf
-   ```conf
+   ```lighttpd
    # 활성화할 모듈 목록
-   server.modules += ("mod_webdav", "mod_setenv")
+   server.modules += ("mod_webdav")
    
    # MIME 타입 설정 파일
    include "mime-types.conf"
    
+   # 서버 유저명/그룹 지정
+   server.username = "lighttpd"
+   server.groupname = "lighttpd"
+   
    # 웹 루트 경로 설정 (WebDAV 저장 위치)
    server.document-root = "/webdav"
-   
-   # 파일명 인코딩 설정 (한글 파일명 깨짐 방지)
-   server.encoding = "utf-8"
-   
-   # 환경 변수 설정 (locale 관련 이슈 방지용)
-   setenv.add-environment = (
-       "LANG" => "en_US.UTF-8"
-   )
    
    # 서버 리스닝 포트 (기본값은 80, 명시적으로 적어줌)
    server.port = 80
