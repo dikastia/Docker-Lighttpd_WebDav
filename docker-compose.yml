@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  webdav:
+    build: .
+    container_name: lighttpd-webdav
+    ports:
+      - "8080:80"
+    volumes:
+      - ./webdav:/webdav
+    restart: unless-stopped
