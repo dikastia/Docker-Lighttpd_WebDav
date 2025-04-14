@@ -6,7 +6,7 @@
 ## 주요 기능
 
 - 🧊 /webdav 폴더의 UID/GID를 읽어서 Lighttpd UID/GID로 변경
-  > **Volume**으로 지정된 경로가 *root*일 경우 오류 (무한 재부팅)
+  > **Volume**으로 지정된 경로가 *root*일 경우 오류 (무한 재부팅)  
   > UID/GID가 이미지 내에서 중복될 경우 UID/GID 변경 안함 
   
 ## Nginx Proxy Manager
